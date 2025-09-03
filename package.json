@@ -1,0 +1,26 @@
+{
+  "name": "e2e_playwright_tests",
+  "version": "1.0.0",
+  "description": "End to End Framework with Playwright - UI and API",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test --headed --project=chromium"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Uvez/E2E_Playwright_tests.git"
+  },
+  "keywords": [],
+  "author": "Uvez Shaikh",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Uvez/E2E_Playwright_tests/issues"
+  },
+  "homepage": "https://github.com/Uvez/E2E_Playwright_tests#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^24.3.0",
+    "dotenv": "^17.2.1"
+  }
+}
