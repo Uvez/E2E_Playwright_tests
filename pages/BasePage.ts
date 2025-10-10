@@ -1,11 +1,28 @@
-import { Page } from "playwright";
+import { Locator, Page, expect } from "playwright/test";
 
-export abstract class BasePage{
+export abstract class BasePage {
     readonly page: Page
-    constructor(page:Page){
+    constructor(page: Page) {
         this.page = page
     }
-async navigate(path:string){
-    await this.page.goto(path);
-}
+    async navigate(path: string) {
+        await this.page.goto(path);
+    }
+
+    locator(Selector: string): Locator {
+        return this.page.locator(Selector);
+    }
+
+    async assertVisible(Selector: string) {
+        await expect(this.locator(Selector)).toBeVisible();
+    }
+
+    async click(selector: string) {
+        await this.locator(selector).click();
+    }
+
+    async type(selector: string, value: string) {
+        await this.locator(selector).fill(value);
+    }
+
 }
