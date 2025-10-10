@@ -27,19 +27,13 @@ test.describe('User Journey', () => {
       await RegisterPage.click_Register();
       const expected_string = 'Welcome ' + random_username;
       await expectHasText(page.locator(test_ids.register.registerSuccessMsg), expected_string);
+
+      await loginPage.goto();
+      await loginPage.login(random_username, 'Test@123');
     });
 
-    //await waitForUrlContains(page, '/registersuccess');
   });
-  //await loginPage.open();
-  //await loginPage.login(creds.email, creds.pass);
-  //await waitForUrlContains(page, '/home');
-  //await homePage.expectLoaded();
-  // });
-
-  //await test.step('Logout', async () => {
-  //await header.logout();
-  //await toast.expectTextContains(/signed out/i);
-  //});
+    
+  
 });
 
