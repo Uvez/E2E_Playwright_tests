@@ -23,9 +23,6 @@ export class AccountPage extends BasePage {
       //valueMap[accountType]
   }
 
-  async clickOpenNewAccount() {
-    await this.click(test_ids.account_services.OpenNewAccountBtn);
-  }
 
   async verifyAccountCreation() {
     await this.assertVisible(test_ids.account_services.account_Success_Msg);

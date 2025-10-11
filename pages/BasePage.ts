@@ -28,7 +28,7 @@ export abstract class BasePage {
 
     async selectOption(selector: string, value: string){
         await this.locator(selector).click();
-        await this.locator(selector).selectOption({label: value});
+        await this.locator(selector).selectOption(value);
     
     }
 

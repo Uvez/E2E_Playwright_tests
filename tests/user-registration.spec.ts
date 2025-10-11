@@ -44,10 +44,13 @@ test.describe('User Journey', () => {
       await AccountPage.clickNewAccount();
       await waitForUrlContains(page, 'openaccount.htm');
       await AccountPage.selectAccountType('1');
-      
-      await AccountPage.clickOpenNewAccount();
-      /*await waitForUrlContains(page, 'openaccount.htm');
-      await AccountPage.verifyAccountCreation();
+      await page.waitForTimeout(2000);
+      //await AccountPage.selectAccountType('1');
+      //await AccountPage.clickOpenNewAccount();
+      await waitForUrlContains(page, 'openaccount.htm');
+      //take screenshot of the opened account page
+      await page.screenshot({ path: `screenshots/open_account_${random_username}.png`, fullPage: true });
+      /*await AccountPage.verifyAccountCreation();
       await waitForUrlContains(page, 'openaccount.htm');
       const Account_number = await AccountPage.getAccountId();
       console.log('Newly created account id is: ' + Account_number);
