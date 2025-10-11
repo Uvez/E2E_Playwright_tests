@@ -18,6 +18,7 @@ export abstract class BasePage {
     }
 
     async click(selector: string) {
+        await this.locator(selector).waitFor({state: 'visible'});
         await this.locator(selector).click();
     }
 
@@ -26,7 +27,9 @@ export abstract class BasePage {
     }
 
     async selectOption(selector: string, value: string){
+        await this.locator(selector).click();
         await this.locator(selector).selectOption({label: value});
+    
     }
 
 }

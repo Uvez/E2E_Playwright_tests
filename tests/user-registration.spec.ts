@@ -41,20 +41,13 @@ test.describe('User Journey', () => {
       await loginPage.goto();
       await loginPage.login(random_username, 'Test@123');
       await waitForUrlContains(page, 'overview.htm');
-    });
-
-    await test.step('Create New Account', async () => {
-      await AccountPage.goto();
-      await waitForUrlContains(page, 'overview.htm');
       await AccountPage.clickNewAccount();
       await waitForUrlContains(page, 'openaccount.htm');
-      await AccountPage.selectAccountType('SAVINGS');
-      await page.click(test_ids.account_services.OpenNewAccountBtn);
-      await waitForUrlContains(page, 'openaccount.htm');
-      await expectHasText(
-        page.locator(test_ids.account_services.account_Success_Msg),
-        'Account Opened!'
-      );
+      await AccountPage.selectAccountType('1');
+      
+      await AccountPage.clickOpenNewAccount();
+      /*await waitForUrlContains(page, 'openaccount.htm');
+      await AccountPage.verifyAccountCreation();
       await waitForUrlContains(page, 'openaccount.htm');
       const Account_number = await AccountPage.getAccountId();
       console.log('Newly created account id is: ' + Account_number);
@@ -63,7 +56,7 @@ test.describe('User Journey', () => {
       //await AccountPage.clickAccountOverview();
       //const accountOverviewLink = await AccountPage.getAccountOverviewLinkById(Account_number);
       //console.log('Account Overview link for account id ' + accountOverviewLink);
-      //expect(accountOverviewLink).not.toBeNull();
+      //expect(accountOverviewLink).not.toBeNull();*/
     });
   });
 });

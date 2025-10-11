@@ -1,5 +1,6 @@
 import { BasePage } from '../BasePage';
 import { test_ids } from '../../data/test-ids';
+import { expect } from '@playwright/test';
 
 export class AccountPage extends BasePage {
   async goto() {
@@ -10,8 +11,16 @@ export class AccountPage extends BasePage {
     await this.click(test_ids.account_services.new_account);
   }
 
-  async selectAccountType(accountType: string) {
+  async selectAccountType(accountType:string): Promise<void> {
+   /* const valueMap = {
+      CHECKING: '0',
+      SAVINGS: '1',
+   };*/
+    //await this.selectOption(test_ids.account_services.accountType, valueMap[accountType]);
+    await this.click(test_ids.account_services.accountType);
     await this.selectOption(test_ids.account_services.accountType, accountType);
+    //await expect(this.locator(test_ids.account_services.accountType)).toHaveValue(
+      //valueMap[accountType]
   }
 
   async clickOpenNewAccount() {
@@ -20,6 +29,9 @@ export class AccountPage extends BasePage {
 
   async verifyAccountCreation() {
     await this.assertVisible(test_ids.account_services.account_Success_Msg);
+    await expect(this.locator(test_ids.account_services.account_Success_Msg)).toHaveText(
+      'Account Opened!'
+    );
   }
 
   async getAccountId(): Promise<string> {

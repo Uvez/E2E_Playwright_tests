@@ -15,7 +15,7 @@ export default defineConfig({
     baseURL: process.env.BASE_URL || 'https://parabank.parasoft.com/',
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
-    video: 'retain-on-failure'
+    //video: 'retain-on-failure'
   },
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
