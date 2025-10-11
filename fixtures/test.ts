@@ -3,12 +3,13 @@ import { test as base, expect, Page, request } from '@playwright/test';
 // Update the path below if the actual file location or casing is different
 import { LoginPage } from '../pages/auth/LoginPage';
 import { RegisterPage } from '../pages/components/RegisterPage'; 
-
+import { AccountPage } from '../pages/components/AccountPage';
 
 
 type AppFixtures = {
   loginPage: LoginPage;
   RegisterPage: RegisterPage;
+  AccountPage: AccountPage;
   //header: HeaderComponent;
   //toast: ToastComponent;
   //creds: { email: string; pass: string };
@@ -22,6 +23,7 @@ export const test = base.extend<AppFixtures>({
 
   loginPage: async ({ page }, use) => { await use(new LoginPage(page)); },
   RegisterPage: async ({ page }, use) => { await use(new RegisterPage(page)); },
+  AccountPage: async ({ page }, use) => { await use(new AccountPage(page)); },
   //header: async ({ page }, use) => { await use(new HeaderComponent(page)); },
   //toast: async ({ page }, use) => { await use(new ToastComponent(page)); },
 

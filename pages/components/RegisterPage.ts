@@ -1,4 +1,3 @@
-import { Console } from "console";
 import { BasePage } from "../BasePage"
 import { test_ids } from "../../data/test-ids";
 
@@ -14,6 +13,10 @@ export class RegisterPage extends BasePage {
     }
 
     async click_Register() {
-        await this.click("//input[@value='Register']")
+        await this.click(test_ids.register.registerButton)
+    }   
+
+     async click_logout() {
+        await this.click(test_ids.account_services.log_out);
     }
-}
+}    

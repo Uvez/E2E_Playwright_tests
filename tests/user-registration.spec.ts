@@ -1,14 +1,17 @@
-
-import { RegisterPage } from '../pages/components/RegisterPage'
-import { test_ids } from "../data/test-ids";
+import { test_ids } from '../data/test-ids';
 import { test, expect } from '../fixtures/test';
 import { waitForUrlContains } from '../utils/waiters';
-import { BasePage } from '../pages/BasePage';
 import { expectHasText } from '../utils/asserts';
+import { AccountPage } from '../pages/components/AccountPage';
 
 test.describe('User Journey', () => {
-  test('Register user and login with same user', async ({ page, loginPage, RegisterPage }) => {
-    await test.step('Register User', async () => {
+  test('Register user and login with same user', async ({
+    page,
+    loginPage,
+    RegisterPage,
+    AccountPage,
+  }) => {
+    await test.step('Register User and Login with Same user', async () => {
       const random_username: string = `user_${Date.now()}`;
       await RegisterPage.goto();
       await RegisterPage.fill_user_details({
@@ -22,18 +25,45 @@ test.describe('User Journey', () => {
         [test_ids.register.SSN]: '456793',
         [test_ids.register.username]: random_username,
         [test_ids.register.password]: 'Test@123',
-        [test_ids.register.confirmPassword]: 'Test@123'
+        [test_ids.register.confirmPassword]: 'Test@123',
       });
       await RegisterPage.click_Register();
       const expected_string = 'Welcome ' + random_username;
-      await expectHasText(page.locator(test_ids.register.registerSuccessMsg), expected_string);
+      await expectHasText(page.locator(test_ids.register.WelcomeMsg), expected_string);
+      console.log('New user is created: ' + random_username);
+      await expectHasText(
+        page.locator(test_ids.register.RegisterSuccessMsg),
+        'Your account was created successfully. You are now logged in.'
+      );
 
+      await RegisterPage.click_logout();
+      await waitForUrlContains(page, 'index.htm');
       await loginPage.goto();
       await loginPage.login(random_username, 'Test@123');
+      await waitForUrlContains(page, 'overview.htm');
     });
 
-  });
-    
-  
-});
+    await test.step('Create New Account', async () => {
+      await AccountPage.goto();
+      await waitForUrlContains(page, 'overview.htm');
+      await AccountPage.clickNewAccount();
+      await waitForUrlContains(page, 'openaccount.htm');
+      await AccountPage.selectAccountType('SAVINGS');
+      await page.click(test_ids.account_services.OpenNewAccountBtn);
+      await waitForUrlContains(page, 'openaccount.htm');
+      await expectHasText(
+        page.locator(test_ids.account_services.account_Success_Msg),
+        'Account Opened!'
+      );
+      await waitForUrlContains(page, 'openaccount.htm');
+      const Account_number = await AccountPage.getAccountId();
+      console.log('Newly created account id is: ' + Account_number);
+      expect(Account_number).not.toBeNull();
 
+      //await AccountPage.clickAccountOverview();
+      //const accountOverviewLink = await AccountPage.getAccountOverviewLinkById(Account_number);
+      //console.log('Account Overview link for account id ' + accountOverviewLink);
+      //expect(accountOverviewLink).not.toBeNull();
+    });
+  });
+});

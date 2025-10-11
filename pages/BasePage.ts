@@ -25,4 +25,8 @@ export abstract class BasePage {
         await this.locator(selector).fill(value);
     }
 
+    async selectOption(selector: string, value: string){
+        await this.locator(selector).selectOption({label: value});
+    }
+
 }
