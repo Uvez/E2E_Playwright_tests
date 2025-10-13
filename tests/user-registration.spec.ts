@@ -43,13 +43,16 @@ test.describe('User Journey', () => {
       await waitForUrlContains(page, 'overview.htm');
       await AccountPage.clickNewAccount();
       await waitForUrlContains(page, 'openaccount.htm');
-      await AccountPage.selectAccountType('1');
-      await page.waitForTimeout(2000);
+      await AccountPage.selectAccountType('SAVINGS');
       //await AccountPage.selectAccountType('1');
-      //await AccountPage.clickOpenNewAccount();
+      await AccountPage.SelectFromAccount();
+      //await page.waitForTimeout(100);
+      await AccountPage.Click_New_Account_Button();
+      await page.waitForTimeout(100);
       await waitForUrlContains(page, 'openaccount.htm');
       //take screenshot of the opened account page
       await page.screenshot({ path: `screenshots/open_account_${random_username}.png`, fullPage: true });
+      
       /*await AccountPage.verifyAccountCreation();
       await waitForUrlContains(page, 'openaccount.htm');
       const Account_number = await AccountPage.getAccountId();

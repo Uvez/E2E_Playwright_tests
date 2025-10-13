@@ -1,6 +1,7 @@
 import { BasePage } from '../BasePage';
 import { test_ids } from '../../data/test-ids';
-import { expect } from '@playwright/test';
+import test, { expect } from '@playwright/test';
+import { pickFirstOptionFromDropdown, selectFirstRealOption, selectRandomOption } from '../../utils/select';
 
 export class AccountPage extends BasePage {
   async goto() {
@@ -11,20 +12,23 @@ export class AccountPage extends BasePage {
     await this.click(test_ids.account_services.new_account);
   }
 
-  async selectAccountType(accountType:string): Promise<void> {
-   /* const valueMap = {
-      CHECKING: '0',
-      SAVINGS: '1',
-   };*/
-    //await this.selectOption(test_ids.account_services.accountType, valueMap[accountType]);
+  async selectAccountType(accountType: string): Promise<void> {
     await this.click(test_ids.account_services.accountType);
-    await this.selectOption(test_ids.account_services.accountType, accountType);
-    //await expect(this.locator(test_ids.account_services.accountType)).toHaveValue(
-      //valueMap[accountType]
+    await this.selectOption(test_ids.account_services.accountType,accountType);
+    //await selectFirstRealOption(this.locator(test_ids.account_services.accountType));
+  }
+  async SelectFromAccount(): Promise<void> {
+
+    await this.click(test_ids.account_services.selectAccount);
+    await this.selectDropdownOption(test_ids.account_services.selectAccount)
+    
   }
 
 
-  async verifyAccountCreation() {
+  async Click_New_Account_Button(){
+    await this.clickandEnter(test_ids.account_services.OpenNewAccountBtn);
+
+  }  async verifyAccountCreation() {
     await this.assertVisible(test_ids.account_services.account_Success_Msg);
     await expect(this.locator(test_ids.account_services.account_Success_Msg)).toHaveText(
       'Account Opened!'
