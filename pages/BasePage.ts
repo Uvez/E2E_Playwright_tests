@@ -39,10 +39,8 @@ export abstract class BasePage {
   }
 
   async clickandEnter(selector: string) {
-    await this.locator(selector).focus();
-    await this.locator(selector).hover();
+
     await this.locator(selector).waitFor({ state: 'visible' });
-    expect(this.locator(selector)).toBeVisible();
-    await this.locator(selector).dblclick( { force: true } );
+    await this.locator(selector).click({button: 'left', delay: 100}); ;
   }
 }

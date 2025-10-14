@@ -25,10 +25,11 @@ export class AccountPage extends BasePage {
   }
 
 
-  async Click_New_Account_Button(){
+  async click_New_Account_Button(){
     await this.clickandEnter(test_ids.account_services.OpenNewAccountBtn);
-
-  }  async verifyAccountCreation() {
+  }  
+  
+  async verifyAccountCreation() {
     await this.assertVisible(test_ids.account_services.account_Success_Msg);
     await expect(this.locator(test_ids.account_services.account_Success_Msg)).toHaveText(
       'Account Opened!'

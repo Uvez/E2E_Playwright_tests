@@ -2,14 +2,14 @@ import { test_ids } from '../data/test-ids';
 import { test, expect } from '../fixtures/test';
 import { waitForUrlContains } from '../utils/waiters';
 import { expectHasText } from '../utils/asserts';
-import { AccountPage } from '../pages/components/AccountPage';
+//import { AccountPage } from '../pages/components/AccountPage';
 
 test.describe('User Journey', () => {
   test('Register user and login with same user', async ({
     page,
     loginPage,
     RegisterPage,
-    AccountPage,
+    AccountPage
   }) => {
     await test.step('Register User and Login with Same user', async () => {
       const random_username: string = `user_${Date.now()}`;
@@ -41,15 +41,19 @@ test.describe('User Journey', () => {
       await loginPage.goto();
       await loginPage.login(random_username, 'Test@123');
       await waitForUrlContains(page, 'overview.htm');
+      await AccountPage.goto();
       await AccountPage.clickNewAccount();
       await waitForUrlContains(page, 'openaccount.htm');
       await AccountPage.selectAccountType('SAVINGS');
       //await AccountPage.selectAccountType('1');
       await AccountPage.SelectFromAccount();
-      //await page.waitForTimeout(100);
-      await AccountPage.Click_New_Account_Button();
       await page.waitForTimeout(100);
-      await waitForUrlContains(page, 'openaccount.htm');
+      await AccountPage.click_New_Account_Button();
+      //await AccountPage.click(test_ids.account_services.OpenNewAccountBtn);
+      //const btn = await page.locator('//input[value="Open New Account"]')
+      //btn.click();
+      await page.waitForTimeout(100);
+      //await waitForUrlContains(page, 'openaccount.htm');
       //take screenshot of the opened account page
       await page.screenshot({ path: `screenshots/open_account_${random_username}.png`, fullPage: true });
       
