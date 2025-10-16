@@ -4,12 +4,18 @@ import { test as base, expect, Page, request } from '@playwright/test';
 import { LoginPage } from '../pages/auth/LoginPage';
 import { RegisterPage } from '../pages/components/RegisterPage'; 
 import { AccountPage } from '../pages/components/AccountPage';
+import { BillPayPage } from '../pages/components/BillPayPage';
+import { TransferPage } from '../pages/components/TransferPage';
+//import { HeaderComponent } from '../pages/components/HeaderComponent';
+//import { ToastComponent } from '../pages/components/ToastComponent';
 
 
 type AppFixtures = {
   loginPage: LoginPage;
   RegisterPage: RegisterPage;
   AccountPage: AccountPage;
+  BillPayPage: BillPayPage;
+  TransferPage: TransferPage;
   //header: HeaderComponent;
   //toast: ToastComponent;
   //creds: { email: string; pass: string };
@@ -24,6 +30,8 @@ export const test = base.extend<AppFixtures>({
   loginPage: async ({ page }, use) => { await use(new LoginPage(page)); },
   RegisterPage: async ({ page }, use) => { await use(new RegisterPage(page)); },
   AccountPage: async ({ page }, use) => { await use(new AccountPage(page)); },
+  BillPayPage: async ({ page }, use) => { await use(new BillPayPage(page)); },
+  TransferPage: async ({ page }, use) => { await use(new TransferPage(page)); },
   //header: async ({ page }, use) => { await use(new HeaderComponent(page)); },
   //toast: async ({ page }, use) => { await use(new ToastComponent(page)); },
 

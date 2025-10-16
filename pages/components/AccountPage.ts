@@ -25,7 +25,7 @@ export class AccountPage extends BasePage {
   }
 
 
-  async click_New_Account_Button(){
+  async click_New_Account_Button(): Promise<void>{
     await this.clickandEnter(test_ids.account_services.OpenNewAccountBtn);
   }  
   
@@ -41,7 +41,7 @@ export class AccountPage extends BasePage {
   }
 
   async clickAccountOverview() {
-    await this.click(test_ids.account_services.account_overview);
+    await this.click(test_ids.account_overview.account_overview);
   }
 
   async getAccountOverviewLinkById(accountId: string): Promise<string | null> {

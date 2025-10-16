@@ -41,6 +41,21 @@ export abstract class BasePage {
   async clickandEnter(selector: string) {
 
     await this.locator(selector).waitFor({ state: 'visible' });
-    await this.locator(selector).click({button: 'left', delay: 100}); ;
+    //await this.locator(selector).click({button: 'left', delay: 100}); ;
+    const button = await this.locator(selector);
+    button.dblclick();
+  }
+
+  async getDropdownOptions(selector: string): Promise<string[]> {
+    const options = await this.$$(selector + ' > option');
+    const values = [];
+    for (const option of options) {
+      values.push(await option.textContent() || '');
+    }
+    return values;
+  }
+
+  async $$(selector: string): Promise<Locator[]> {
+    return this.page.locator(selector).all();
   }
 }
