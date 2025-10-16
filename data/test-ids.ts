@@ -33,6 +33,7 @@ export const test_ids = {
   },
   Home: {
     //logout: "//a[text()='Log Out']"
+    Home_Btn: "//a[text()='Home']"
   },
   account_services: {
     Welcome_Messagae: "//p[@class='smallText']",
@@ -57,6 +58,7 @@ export const test_ids = {
     transferBtn: "//input[@value='Transfer']",
     transfer_details: "//div[@id='showResult']/p[1]",
     transfer_success_msg: "//div[@id='showResult']/h1",
+    error_message:"//div[@id='showError']/p[1]"
   },
   bill_pay: {
     bill_pay: "//a[text()='Bill Pay']",
@@ -73,5 +75,8 @@ export const test_ids = {
     send_payment_btn: "//input[@value='Send Payment']",
     bill_pay_success_msg: "//div[@id='billpayResult']/h1",
     bill_pay_details: "//div[@id='billpayResult']/p[1]",
+    error_account_verification: "//span[@id='validationModel-verifyAccount-mismatch']",
+    error_valid_account_number:"//span[@id='validationModel-verifyAccount-invalid']",
+    error_account_required_message :"//span[@id='validationModel-verifyAccount-empty']"
   },
 } as const;
