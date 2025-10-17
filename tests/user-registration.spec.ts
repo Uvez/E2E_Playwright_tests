@@ -2,6 +2,7 @@ import { test_ids } from '../data/test-ids';
 import { test, expect } from '../fixtures/test';
 import { waitForUrlContains } from '../utils/waiters';
 import { expectHasText } from '../utils/asserts';
+import { request } from 'http';
 
 test.describe('User Journey', () => {
   test('User Register and Do Account Services', async ({
@@ -11,9 +12,11 @@ test.describe('User Journey', () => {
     AccountPage,
     BillPayPage,
     TransferPage,
+    api
   }) => {
     const random_username: string = `user_${Date.now()}`;
     let Account_number: string = '';
+    let amount_to_pay: string = '10.00';
     await test.step('Register User and Login with Same user', async () => {
       await RegisterPage.goto();
       await RegisterPage.fill_user_details({
@@ -100,14 +103,31 @@ test.describe('User Journey', () => {
         await BillPayPage.fill_payment_details({
           [test_ids.bill_pay.payee_account]: '123456',
           [test_ids.bill_pay.verify_account]: '123456',
-          [test_ids.bill_pay.amount]: '10.00',
+          [test_ids.bill_pay.amount]: amount_to_pay,
         });
         await BillPayPage.selectFromAccount(Account_number);
         await BillPayPage.click_Send_Payment();
         await page.waitForTimeout(1000);
         await waitForUrlContains(page, 'billpay.htm');
         await BillPayPage.verifyPaymentSuccess();
-        await BillPayPage.verifyPaymentDetails('10.00', Account_number, 'Test');
+        await BillPayPage.verifyPaymentDetails(amount_to_pay, Account_number, 'Test');
     });
+
+    //https://parabank.parasoft.com/parabank/services_proxy/bank/accounts/17007/transactions/amount/50
+    test.step('Find transaction API call', async () => {
+      const res = await api.get(`${Account_number}/transactions/amount/${amount_to_pay}`);
+      expect(res.status()).toBe(200);
+      expect(res.ok()).toBeTruthy();
+      /*expect(res.status()).toBe(200);
+      const responseBody = await res.json();
+      console.log('API Response for account transactions: ' + JSON.stringify(responseBody));
+      expect(responseBody.accountId).toBeDefined();
+      expect(responseBody.transactions).toBeDefined();
+      expect(Array.isArray(responseBody.transactions)).toBe(true);*/
+      
+      
+    });
+
+
   });
 });

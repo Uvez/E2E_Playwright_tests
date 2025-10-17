@@ -1,6 +1,7 @@
 import { BasePage } from "../BasePage"
 import { test_ids } from "../../data/test-ids";
 import { expect } from "@playwright/test";
+import { Console } from "console";
 
 export class BillPayPage extends BasePage {
     async goto() {
@@ -39,6 +40,7 @@ export class BillPayPage extends BasePage {
         await expect(this.locator(test_ids.bill_pay.bill_pay_details)).toContainText(
           `Bill Payment to ${toPayee} in the amount of $${amount} from account ${fromAccount} was successful.`
         );
+        console.log(`Bill Payment to ${toPayee} in the amount of $${amount} from account ${fromAccount} was successful.`)
       }
 
 }    

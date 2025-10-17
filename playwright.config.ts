@@ -5,7 +5,7 @@ dotenv.config();
 
 export default defineConfig({
   testDir: './tests/',
-  //timeout: 30_000,
+  //timeout: 20_000,
   //expect: { timeout: 5_000 },
   fullyParallel: true,
   //forbidOnly: !!process.env.CI,
