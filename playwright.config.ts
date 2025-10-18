@@ -18,9 +18,17 @@ export default defineConfig({
     //video: 'retain-on-failure'
   },
   projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    { name: 'firefox',  use: { ...devices['Desktop Firefox'] } },
-    { name: 'webkit',   use: { ...devices['Desktop Safari'] } },
+
+      {name :'setup', testMatch:  /.*\.setup\.ts/},
+
+    { name: 'chromium', 
+      dependencies:['setup'],
+      use: { ...devices['Desktop Chrome'],
+        storageState :'.auth/user.json'
+      }
+     },
+    { name: 'firefox',  use: { ...devices['Desktop Firefox'], storageState :'.auth/user.json' } },
+    { name: 'webkit',   use: { ...devices['Desktop Safari'], storageState :'.auth/user.json'} },
     // Mobile example
     //{ name: 'mobile-chrome', use: { ...devices['Pixel 7'] } }
   ],

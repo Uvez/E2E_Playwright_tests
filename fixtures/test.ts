@@ -28,6 +28,7 @@ export const test = base.extend<AppFixtures>({
  //creds: async ({}, use) => {
    // await use({ email: defaultConfig.creds.stdUser, pass: defaultConfig.creds.stdPass });
   //},
+  // one context for all tests in the worker
 
   loginPage: async ({ page }, use) => { await use(new LoginPage(page)); },
   RegisterPage: async ({ page }, use) => { await use(new RegisterPage(page)); },
@@ -35,20 +36,7 @@ export const test = base.extend<AppFixtures>({
   BillPayPage: async ({ page }, use) => { await use(new BillPayPage(page)); },
   TransferPage: async ({ page }, use) => { await use(new TransferPage(page)); },
   header: async ({ page }, use) => { await use(new header(page)); },
-  //header: async ({ page }, use) => { await use(new HeaderComponent(page)); },
-  //toast: async ({ page }, use) => { await use(new ToastComponent(page)); },
 
-
-  /*api: async ({ playwright }, use) => {
-    const api = await playwright.request.newContext({ baseURL: process.env.API_GET_URL,
-      extraHTTPHeaders: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },  
-    });
-    await use(api as any);
-    await api.dispose();
-  },*/
 
   api: [async ({}, use) => {
     const api = await pwRequest.newContext({

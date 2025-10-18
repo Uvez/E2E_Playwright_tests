@@ -32,7 +32,7 @@ export class TransferPage extends BasePage {
     async verifyTransferdetails(amount:string, fromAccount:string, toAccount:string) {
         await this.assertVisible(test_ids.transfer_funds.transfer_details);
         await expect(this.locator(test_ids.transfer_funds.transfer_details)).toContainText(
-          `$${amount} has been transferred from account  #${fromAccount} to account #${toAccount}.`
+          `$${amount} has been transferred from account #${fromAccount} to account #${toAccount}.`
         );
       }
 }    
