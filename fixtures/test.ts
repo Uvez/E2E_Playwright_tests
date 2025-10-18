@@ -6,7 +6,7 @@ import { RegisterPage } from '../pages/components/RegisterPage';
 import { AccountPage } from '../pages/components/AccountPage';
 import { BillPayPage } from '../pages/components/BillPayPage';
 import { TransferPage } from '../pages/components/TransferPage';
-import {header } from '../pages/components/Header';
+import {HeaderPage } from '../pages/components/HeaderPage';
 //import { HeaderComponent } from '../pages/components/HeaderComponent';
 //import { ToastComponent } from '../pages/components/ToastComponent';
 
@@ -17,7 +17,7 @@ type AppFixtures = {
   AccountPage: AccountPage;
   BillPayPage: BillPayPage;
   TransferPage: TransferPage;
-  header: header;
+  HeaderPage: HeaderPage;
   //header: HeaderComponent;
   //toast: ToastComponent;
   //creds: { email: string; pass: string };
@@ -35,30 +35,8 @@ export const test = base.extend<AppFixtures>({
   AccountPage: async ({ page }, use) => { await use(new AccountPage(page)); },
   BillPayPage: async ({ page }, use) => { await use(new BillPayPage(page)); },
   TransferPage: async ({ page }, use) => { await use(new TransferPage(page)); },
-  header: async ({ page }, use) => { await use(new header(page)); },
-
-
-  api: [async ({}, use) => {
-    const api = await pwRequest.newContext({
-      baseURL: process.env.API_GET_URL ?? 'https://parabank.parasoft.com/parabank/services_proxy/bank/accounts/',
-      extraHTTPHeaders: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      // storageState: 'storageState.api.json', // if you rely on cookies
-    });
-  console.info('[api] created');
-    try {
-      await use(api);          // valid for the entire test
-    } finally {
-      console.info('[api] disposing');
-      await api.dispose();     // disposed right after the test
-      console.info('[api] disposed');
-    }
-  }, { scope: 'test' }],
-
+  HeaderPage: async ({ page }, use) => { await use(new HeaderPage(page)); },
 });
-//https://parabank.parasoft.com/parabank/services_proxy/bank/accounts/17007/transactions/amount/50
 
 
 export { expect };
