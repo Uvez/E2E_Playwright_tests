@@ -1,5 +1,9 @@
 # E2E_Playwright_tests
-End to End Framework with Playwright - UI and API,DB
+**README Documentation**
+
+This README provides setup and usage instructions for the E2E Playwright test framework. It outlines prerequisites, installation steps, environment configuration, test execution commands, and describes the project structure. The documentation is intended to help users quickly install dependencies, configure the environment, run tests, and understand the organization of the framework components.
+
+End to End Framework with Playwright - UI and API,DB  
 This is a modular test framework developed in Playwright
 
 ## Quick Start
