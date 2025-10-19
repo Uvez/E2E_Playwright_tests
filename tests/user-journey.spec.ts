@@ -24,6 +24,19 @@ test.describe.serial('User Journey', () => {
     await waitForUrlContains(page, 'overview.htm');
   });
 
+  test('Verify all Global navigation is working as expected', async ({ page, HeaderPage }) => {
+    await HeaderPage.goto()
+    await HeaderPage.click_verify_link(test_ids.header.AboutUs,'about.htm')
+    await HeaderPage.click_verify_link(test_ids.header.Services,'services.htm')
+    await HeaderPage.click_verify_link(test_ids.header.AdminPage,'admin.htm')
+    await HeaderPage.click_verify_link(test_ids.header.Products,'https://www.parasoft.com/products/')
+    await HeaderPage.go_back()
+    await HeaderPage.click_verify_link(test_ids.header.Locations,'https://www.parasoft.com/solutions/')
+    await HeaderPage.go_back()
+
+  });
+
+  
   test('Create a new Savings account', async ({ page, AccountPage }) => {
     await AccountPage.goto();
     await AccountPage.clickNewAccount();
