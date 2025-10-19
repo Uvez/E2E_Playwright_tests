@@ -1,10 +1,12 @@
 {
-  "firstname": "Test",
-  "lastname": "User",
-  "address": "India",
-  "city": "Mumbai",
-  "state": "Mumbai",
-  "zipcode": "12345",
-  "phone": "345678",
-  "SSN": "456793"
+  "user_details": {
+    "firstname": "Test",
+    "lastname": "User",
+    "address": "India",
+    "city": "Mumbai",
+    "state": "Mumbai",
+    "zipcode": "12345",
+    "phone": "1234567890",
+    "ssn": "456793"
+  }
 }
