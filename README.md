@@ -31,16 +31,23 @@ Windows
   `npx -v`
   `git --version`
  
+- I have used `npm version = 11.4.2` and `node version = v22.16`
 
-
-## Quick setup (one time)
+## Quick setup 
 
 1. Open Github link and clone the github repistory into your local system by using terminal
 
-    ``cd https://github.com/Uvez/E2E_Playwright_tests.git``
+    `cd https://github.com/Uvez/E2E_Playwright_tests.git`
 
-2. Install node modules:
-   `npm install`
+2. Install below node modules:
+   `npm install typescript`
+   `npm install ts-node`
+   `npm install prettier`
+   `npm install eslint`
+   `npm install dotenv`
+   `npm install @types/node`
+   `npm install @playwright/test`
+   `npm install @faker-js/faker`
 
 3. Install Playwright browsers:
 
@@ -84,7 +91,7 @@ Windows
   `npx playwright show-report`
 
 
-## Project layout and what each folder/file does (simple)
+## Project layout and what each folder/file does: 
 
 - `playwright.config.ts`  
   Playwright configuration (time outs, reporters, baseURL, projects).
@@ -119,10 +126,10 @@ Windows
   - `utils/logger.ts` — simple logger
 
 - `.env`  
-  Environment overrides (BASE_URL etc.)
+  Environment overrides (BASE_URL, API URL.)
 
 - `package.json`  
-  Scripts and dependencies (run tests, lint, etc.)
+  Scripts and dependencies (run tests, packaged installed)
 
 ## How the test files use the project
 
