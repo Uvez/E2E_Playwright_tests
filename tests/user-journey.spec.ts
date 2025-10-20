@@ -11,8 +11,8 @@ dotenv.config();
 
 test.describe.serial('User Journey', () => {
   const state = {
-    amount_to_pay: '10.00',
-    transfer_amount: '10.00',
+    amount_to_pay: test_data.finance.amount(),
+    transfer_amount: test_data.finance.amount(),
     payee_firstname : test_data.person.firstName(),
     payee_account_number : test_data.finance.accountNumber()
   };
@@ -66,7 +66,7 @@ test.describe.serial('User Journey', () => {
     await AccountPage.goto();
     await AccountPage.clickAccountOverview();
     const accountOverviewLink = await AccountPage.getAccountOverviewLinkById(accountNumber);
-    console.log('Account Overview link for account id ' + accountOverviewLink);
+    log.info('Account Overview link for account id ' + accountOverviewLink);
     expect(accountOverviewLink, 'Overview link should exist for the created account').toBeTruthy();
   });
 
@@ -83,7 +83,7 @@ test.describe.serial('User Journey', () => {
     await page.waitForTimeout(1000);
     await waitForUrlContains(page, 'transfer.htm');
     await TransferPage.verifyTransferSuccess();
-    await TransferPage.verifyTransferdetails('10.00', fromAccount, accountNumber);
+    await TransferPage.verifyTransferdetails(state.transfer_amount, fromAccount, accountNumber);
   });
 
   test('Bill Pay succeeds and transactions are visible via API', async ({ page, BillPayPage,Find_Transaction }) => {

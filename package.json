@@ -8,7 +8,8 @@
     "format": "prettier -w .",
     "test:ui": "npx playwright test --ui",
     "test:headed": "npx playwright test --headed --project=chromium",
-    "test:all":"npx playwright test --headed --project=chromium --project=firefox --project=webkit"
+    "test:all":"npx playwright test --headed --project=chromium --project=firefox --project=webkit",
+    "test:allheadless":"npx playwright test --project=chromium --project=firefox --project=webkit"
   },
   "repository": {
     "type": "git",

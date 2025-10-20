@@ -1,7 +1,8 @@
 export type Transaction = {
-  id: number;
-  accountId: number | string; 
-  amount: number | string;      
-  type: 'Credit' | 'Debit' | string;
+  accountId: number | string;
+  amount: number | string;
+  date: number | string;
   description: string;
+  id: number;
+  type: 'Credit' | 'Debit' | string;
 };
