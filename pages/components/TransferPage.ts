@@ -1,6 +1,7 @@
 import { BasePage } from "../BasePage"
 import { test_ids } from "../../data/test-ids";
 import { expect } from "@playwright/test";
+import { log } from '../../utils/logger';
 
 export class TransferPage extends BasePage {
     async goto() {

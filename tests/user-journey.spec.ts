@@ -49,7 +49,7 @@ test.describe.serial('User Journey', () => {
     await AccountPage.clickNewAccount();
     await waitForUrlContains(page, 'openaccount.htm');
     await AccountPage.selectAccountType('SAVINGS');
-    await AccountPage.SelectFromAccount();
+    await AccountPage.selectFromAccount();
     await page.waitForSelector(test_ids.account_services.new_account, { state: 'visible' });
     await AccountPage.click_New_Account_Button();
     await page.waitForTimeout(1000);
@@ -70,7 +70,7 @@ test.describe.serial('User Journey', () => {
     expect(accountOverviewLink, 'Overview link should exist for the created account').toBeTruthy();
   });
 
-  test('Transfer Funds into Account', async ({ page, TransferPage,account }) => {
+  test('Transfer Funds into Account', async ({ page, TransferPage }) => {
     await TransferPage.goto();
     await TransferPage.click(test_ids.transfer_funds.transfer_funds);
     await page.waitForTimeout(1000);
@@ -86,7 +86,7 @@ test.describe.serial('User Journey', () => {
     await TransferPage.verifyTransferdetails('10.00', fromAccount, accountNumber);
   });
 
-  test('Bill Pay succeeds and transactions are visible via API', async ({ page, BillPayPage }) => {
+  test('Bill Pay succeeds and transactions are visible via API', async ({ page, BillPayPage,Find_Transaction }) => {
     await BillPayPage.goto();
     await BillPayPage.click(test_ids.bill_pay.bill_pay);
     await page.waitForTimeout(1000);
@@ -114,33 +114,13 @@ test.describe.serial('User Journey', () => {
     const res = await page.request.get(
       `${process.env.API_GET_URL}${accountNumber}/transactions/amount/${state.amount_to_pay}`
     );
-    console.log('API Response status for account transactions: ' + res.status());
+    log.info('API Response status for account transactions: ' + res.status());
     expect(res.status()).toBe(200);
     expect(res.ok()).toBeTruthy();
     const responseBody = await res.json();
-    console.log('API Response for account transactions: ' + JSON.stringify(responseBody));
+    log.info('API Response for account transactions: ' + JSON.stringify(responseBody))
 
     expect(Array.isArray(responseBody)).toBeTruthy();
-
-    if (responseBody.length > 1) {
-      expect(responseBody[1].amount).toBe(parseFloat(state.amount_to_pay));
-      expect(responseBody[1].accountId).toBe(parseInt(accountNumber));
-    } else {
-      throw new Error(
-        'API response does not contain enough transactions to verify accountId and Amount'
-      );
-    }
-
-    expect(responseBody).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          id: expect.any(Number),
-          type: expect.stringMatching(/Credit|Debit/),
-          description: expect.any(String),
-          accountId: parseInt(accountNumber),
-          amount: parseInt(state.amount_to_pay),
-        }),
-      ])
-    );
+    Find_Transaction.verify_JSON_responses(responseBody,state.amount_to_pay,accountNumber)
   });
 });

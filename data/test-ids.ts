@@ -41,6 +41,7 @@ export const test_ids = {
     log_out: "//a[text()='Log Out']",
     accountType: "//select[@id='type']",
     selectAccount: "//select[@id='fromAccountId']",
+    accountOverview:"//div[@id='showOverview']//a",
     OpenNewAccountBtn: "//input[@value='Open New Account']",
     account_Success_Msg: "//div[@id='openAccountResult']/h1",
     accountid: "//div[@id='openAccountResult']/p[2]/a",

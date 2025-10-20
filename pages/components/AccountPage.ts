@@ -1,51 +1,104 @@
 import { BasePage } from '../BasePage';
 import { test_ids } from '../../data/test-ids';
 import test, { expect } from '@playwright/test';
-import { pickFirstOptionFromDropdown, selectFirstRealOption, selectRandomOption } from '../../utils/select';
+import { log } from '../../utils/logger';
 
 export class AccountPage extends BasePage {
-  async goto() {
-    await this.navigate('/parabank/overview.htm');
+  async goto(): Promise<void> {
+    try {
+      await this.navigate('/parabank/overview.htm');
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : String(error);
+      throw new Error(msg);
+      log.warn(msg);
+    }
   }
 
-  async clickNewAccount() {
-    await this.click(test_ids.account_services.new_account);
+  async clickNewAccount(): Promise<void> {
+    try {
+      await this.click(test_ids.account_services.new_account);
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : String(error);
+      throw new Error(msg);
+      log.warn(msg);
+    }
   }
 
   async selectAccountType(accountType: string): Promise<void> {
-    await this.click(test_ids.account_services.accountType);
-    await this.selectOption(test_ids.account_services.accountType,accountType);
-    //await selectFirstRealOption(this.locator(test_ids.account_services.accountType));
+    try {
+      await this.click(test_ids.account_services.accountType);
+      await this.selectOption(test_ids.account_services.accountType, accountType);
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : String(error);
+      throw new Error(msg);
+      log.warn(msg);
+    }
   }
-  async SelectFromAccount(): Promise<void> {
-
-    await this.click(test_ids.account_services.selectAccount);
-    await this.selectDropdownOption(test_ids.account_services.selectAccount)
-    
+  async selectFromAccount(): Promise<void> {
+    try {
+      await this.click(test_ids.account_services.selectAccount);
+      await this.selectDropdownbyIndex(test_ids.account_services.selectAccount,0);
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : String(error);
+      throw new Error(msg);
+      log.warn(msg);
+    }
   }
 
+  async click_New_Account_Button(): Promise<void> {
+    try {
+      await this.clickandEnter(test_ids.account_services.OpenNewAccountBtn);
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : String(error);
+      throw new Error(msg);
+      log.warn(msg);
+    }
+  }
 
-  async click_New_Account_Button(): Promise<void>{
-    await this.clickandEnter(test_ids.account_services.OpenNewAccountBtn);
-  }  
-  
-  async verifyAccountCreation() {
-    await this.assertVisible(test_ids.account_services.account_Success_Msg);
-    await expect(this.locator(test_ids.account_services.account_Success_Msg)).toHaveText(
-      'Account Opened!'
-    );
+  async verifyAccountCreation(): Promise<void> {
+    try {
+      await this.assertVisible(test_ids.account_services.account_Success_Msg);
+      await expect(this.locator(test_ids.account_services.account_Success_Msg)).toHaveText(
+        'Account Opened!'
+      );
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : String(error);
+      throw new Error(msg);
+      log.warn(msg);
+    }
   }
 
   async getAccountId(): Promise<string> {
-    return this.locator(test_ids.account_services.accountid).innerText();
+    try {
+      const accountId = this.locator(test_ids.account_services.accountid).innerText();
+      return accountId;
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : String(error);
+      throw new Error(msg);
+      log.warn(msg);
+    }
   }
 
-  async clickAccountOverview() {
-    await this.click(test_ids.account_overview.account_overview);
+  async clickAccountOverview(): Promise<void> {
+    try {
+      await this.click(test_ids.account_overview.account_overview);
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : String(error);
+      throw new Error(msg);
+      log.warn(msg);
+    }
   }
 
   async getAccountOverviewLinkById(accountId: string): Promise<string | null> {
-    const link = this.page.locator(`//div[@id='showOverview']//a[contains(@href, '${accountId}')]`);
-    return link.first().getAttribute('href');
+    try {
+      const link = this.page.locator(
+        `${test_ids.account_services.accountOverview}[contains(@href, '${accountId}')]`
+      );
+      return link.first().getAttribute('href');
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : String(error);
+      throw new Error(msg);
+      log.warn(msg);
+    }
   }
 }

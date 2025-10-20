@@ -13,8 +13,7 @@ import { AccountPage } from '../pages/components/AccountPage';
 import { BillPayPage } from '../pages/components/BillPayPage';
 import { TransferPage } from '../pages/components/TransferPage';
 import { HeaderPage } from '../pages/components/HeaderPage';
-import * as register from '../data/register.json' assert {type: 'json'};
-import * as account from '../data/account.json'assert {type: 'json'};
+import { Find_Transaction } from '../pages/api/find_Transaction';
 //import { HeaderComponent } from '../pages/components/HeaderComponent';
 //import { ToastComponent } from '../pages/components/ToastComponent';
 
@@ -25,12 +24,11 @@ type AppFixtures = {
   BillPayPage: BillPayPage;
   TransferPage: TransferPage;
   HeaderPage: HeaderPage;
+  Find_Transaction : Find_Transaction;
   //header: HeaderComponent;
   //toast: ToastComponent;
   //creds: { email: string; pass: string };
   api: APIRequestContext;
-  register: typeof register;
-  account: typeof account;
 };
 
 export const test = base.extend<AppFixtures>({
@@ -57,11 +55,8 @@ export const test = base.extend<AppFixtures>({
   HeaderPage: async ({ page }, use) => {
     await use(new HeaderPage(page));
   },
-  register: async ({}, use) => {
-    await use(register);
-  },
-  account: async ({}, use) => {
-    await use(account);
+   Find_Transaction: async ({ page }, use) => {
+    await use(new Find_Transaction());
   },
 });
 

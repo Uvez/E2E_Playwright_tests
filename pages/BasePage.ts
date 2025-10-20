@@ -29,17 +29,16 @@ export abstract class BasePage {
 
   async selectOption(selector: string, value: string) {
     await this.locator(selector).click();
-    await this.locator(selector).selectOption({label : value});
+    await this.locator(selector).selectOption({ label: value });
   }
 
-  async selectDropdownOption(selector: string) {
+  async selectDropdownbyIndex(selector: string,index:number) {
     await this.locator(selector).click();
-    await this.locator(selector).focus(); 
-    await this.locator(selector).selectOption({ index: 0 });
+    await this.locator(selector).focus();
+    await this.locator(selector).selectOption({ index: index });
   }
 
   async clickandEnter(selector: string) {
-
     await this.locator(selector).waitFor({ state: 'visible' });
     //await this.locator(selector).click({button: 'left', delay: 100}); ;
     const button = await this.locator(selector);
@@ -50,12 +49,16 @@ export abstract class BasePage {
     const options = await this.$$(selector + ' > option');
     const values = [];
     for (const option of options) {
-      values.push(await option.textContent() || '');
+      values.push((await option.textContent()) || '');
     }
     return values;
   }
 
   async $$(selector: string): Promise<Locator[]> {
     return this.page.locator(selector).all();
+  }
+
+  async waitForUrlContains(page: Page, fragment: string) {
+    await expect(page).toHaveURL(new RegExp(fragment));
   }
 }
