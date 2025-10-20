@@ -110,24 +110,24 @@ Windows
 - pages/  
   Page object models (POM). These wrap UI actions and selectors so tests stay readable. Common subfolders:
   - pages/auth — login related page(s)
-    - LoginPage
+    - `LoginPage`
   - pages/components — feature pages and small components
-    - RegisterPage
-    - AccountPage
-    - BillPayPage
-    - TransferPage
-    - HeaderPage
+    - `RegisterPage`
+    - `AccountPage`
+    - `BillPayPage`
+    - `TransferPage`
+    - `HeaderPage`
 
 
 - data/  
   Centralized locators and test IDs:
-  - data/test-ids.ts
+  - `data/test-ids.ts`
 
 - utils/  
   Helper utilities used by pages/tests:
-  - utils/waiters.ts — helper to wait for URLs or conditions
-  - utils/asserts.ts — custom assertion helpers
-  - utils/logger.ts — simple logger
+  - `utils/waiters.ts` — helper to wait for URLs or conditions
+  - `utils/asserts.ts` — custom assertion helpers
+  - `utils/logger.ts` — simple logger
 
 - .env  
   Environment overrides (BASE_URL etc.)
