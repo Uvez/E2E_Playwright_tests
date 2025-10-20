@@ -47,55 +47,54 @@ Windows
 
 ## Quick setup (one time)
 
-1. Open a terminal in the project root:
-   cd /Users/darkos/Documents/Projects/Fabric_Project/E2E_Playwright_tests
+1. Open Github link and clone the github repistory into your local system by using terminal
+
+    ``cd https://github.com/Uvez/E2E_Playwright_tests.git``
 
 2. Install node modules:
-   ```sh
-   npm install
-   ```
+   `npm install`
 
 3. Install Playwright browsers:
-   ```sh
-   npx playwright install
-   ```
+ß
+   `npx playwright install`
 
-4. Create or edit `.env` (if needed) to set BASE_URL and other values:
-   ```
-   BASE_URL=https://your-app-url.example
-   ```
+4. Create or edit `.env` to set BASE_URL:
+
+   `BASE_URL='https://parabank.parasoft.com/'`
 
 ## How to run tests
 
-- Run all tests:
-  ```sh
-  npm run test
-  ```
+- Run test (By default it will be executed in chrome browser)
+  `npm run test`
+
+- Running test in all browser
+
+  `npm run test:all`
 
 - Run a single test file:
-  ```sh
-  npx playwright test tests/user-registration.spec.ts
-  ```
+
+  `npx playwright test tests/user-journey.spec.ts`
+ 
 
 - Run a single test by name (grep):
-  ```sh
-  npx playwright test -g "User Register and Do Account Services"
-  ```
+
+  `npx playwright test -g "User Register and Do Account Services"`
+
 
 - Run tests headed (show the browser UI):
-  ```sh
-  npx playwright test --headed
-  ```
+
+ `npm run test:headed`
+
 
 - Run a test in debug mode:
-  ```sh
-  PWDEBUG=1 npx playwright test tests/user-registration.spec.ts
-  ```
+ 
+  `PWDEBUG=1 npx playwright test tests/user-journeyspec.ts`
+
 
 - Show the HTML report after a run:
-  ```sh
-  npx playwright show-report
-  ```
+  
+  `npx playwright show-report`
+
 
 ## Project layout and what each folder/file does (simple)
 
@@ -106,7 +105,7 @@ Windows
   Custom Playwright fixtures. This file creates and exposes page objects (loginPage, RegisterPage, AccountPage, etc.) and other shared fixtures to tests.
 
 - tests/  
-  Test spec files. Example: `tests/user-registration.spec.ts` — main end‑to‑end scenario.
+  Test spec files. Example: `tests/user-journey.spec.ts` — main end‑to‑end scenario.
 
 - pages/  
   Page object models (POM). These wrap UI actions and selectors so tests stay readable. Common subfolders:
@@ -128,7 +127,6 @@ Windows
   Helper utilities used by pages/tests:
   - utils/waiters.ts — helper to wait for URLs or conditions
   - utils/asserts.ts — custom assertion helpers
-  - utils/select.ts — select/dropdown helpers
   - utils/logger.ts — simple logger
 
 - .env  

@@ -4,10 +4,11 @@
   "description": "End to End Framework with Playwright - UI and API",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test --headed --project=chromium",
+    "test": "npx playwright test --project=chromium",
     "format": "prettier -w .",
     "test:ui": "npx playwright test --ui",
-    "test:headed": "npx playwright test --headed"
+    "test:headed": "npx playwright test --headed --project=chromium",
+    "test:all":"npx playwright test --headed --project=chromium --project=firefox --project=webkit"
   },
   "repository": {
     "type": "git",

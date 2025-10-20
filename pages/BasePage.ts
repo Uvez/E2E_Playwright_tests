@@ -40,7 +40,6 @@ export abstract class BasePage {
 
   async clickandEnter(selector: string) {
     await this.locator(selector).waitFor({ state: 'visible' });
-    //await this.locator(selector).click({button: 'left', delay: 100}); ;
     const button = await this.locator(selector);
     button.dblclick();
   }
