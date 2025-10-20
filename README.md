@@ -3,23 +3,24 @@
 Simple step‑by‑step guide to set up and run the Playwright E2E tests for this project.
 
 ## Prerequisites (what you need)
+
 Mac (macOS) and Window OS
+
 - OS: macOS 10.14 or newer.
 - Install Node.js:
   - Using Homebrew (recommended):
-   
+
     `brew install node`
 
   - Or download installer from `https://nodejs.org` and run it.
   - Verify whether node is installed in MacOS system :
-  `node -v`
-  `npm -v`
-  `npx -v`
-  `git --version`
-
-
+    `node -v`
+    `npm -v`
+    `npx -v`
+    `git --version`
 
 Windows
+
 - OS: Windows 10 or Windows 11.
 - Install Node.js:
   - Download and run the LTS installer from `https://nodejs.org` and follow the installer.
@@ -30,14 +31,14 @@ Windows
   `npm -v`
   `npx -v`
   `git --version`
- 
+
 - I have used `npm version = 11.4.2` and `node version = v22.16`
 
-## Quick setup 
+## Quick setup
 
 1. Open Github link and clone the github repistory into your local system by using terminal
 
-    `cd https://github.com/Uvez/E2E_Playwright_tests.git`
+   `cd https://github.com/Uvez/E2E_Playwright_tests.git`
 
 2. Install below node modules:
    `npm install typescript`
@@ -69,29 +70,24 @@ Windows
 - Run a single test file:
 
   `npx playwright test tests/user-journey.spec.ts`
- 
 
 - Run a single test by name (grep):
 
   `npx playwright test -g "User Register and Do Account Services"`
 
-
 - Run tests headed (show the browser UI):
 
- `npm run test:headed`
-
+`npm run test:headed`
 
 - Run a test in debug mode:
- 
+
   `PWDEBUG=1 npx playwright test tests/user-journeyspec.ts`
 
-
 - Show the HTML report after a run:
-  
+
   `npx playwright show-report`
 
-
-## Project layout and what each folder/file does: 
+## Project layout and what each folder/file does:
 
 - `playwright.config.ts`  
   Playwright configuration (time outs, reporters, baseURL, projects).
@@ -113,7 +109,6 @@ Windows
     - `BillPayPage`
     - `TransferPage`
     - `HeaderPage`
-
 
 - `data/`  
   Centralized locators and test IDs:
@@ -137,5 +132,3 @@ Windows
 - Use async test callbacks and await page actions.
 - Keep selectors in `data/test-ids.ts` so locators are easy to update.
 - Utlized faer library for Test data generation every run.
-
-
