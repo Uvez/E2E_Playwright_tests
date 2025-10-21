@@ -41,14 +41,22 @@ Windows
    `cd https://github.com/Uvez/E2E_Playwright_tests.git`
 
 2. Install below node modules:
-   `npm install typescript`
-   `npm install ts-node`
-   `npm install prettier`
-   `npm install eslint`
-   `npm install dotenv`
-   `npm install @types/node`
-   `npm install @playwright/test`
-   `npm install @faker-js/faker`
+
+   `npm install typescript --save-dev`
+
+   `npm install ts-node --save-dev`
+
+   `npm install prettier --save-dev`
+
+   `npm install eslint --save-dev`
+
+   `npm install dotenv --save-dev`
+
+   `npm install @types/node --save-dev`
+
+   `npm install @playwright/test --save-dev`
+
+   `npm install @faker-js/faker --save-dev`
 
 3. Install Playwright browsers:
 

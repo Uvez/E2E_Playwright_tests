@@ -59,7 +59,6 @@ test.describe.serial('User Journey', () => {
     accountNumber = await AccountPage.getAccountId();
     expect(accountNumber, 'New account id should be captured').toBeTruthy();
     log.info('Account Number created:'+accountNumber)
-    // Account Number created: can be logged with a test logger if needed
   });
 
   test('Account Overview lists the new account', async ({ AccountPage}) => {
@@ -76,7 +75,7 @@ test.describe.serial('User Journey', () => {
     await page.waitForTimeout(1000);
     await waitForUrlContains(page, 'transfer.htm');
     fromAccount = await TransferPage.getFromAccountNumber();
-    console.log('From account number is: ' + fromAccount);
+    log.info('From account number is: ' + fromAccount);
     await TransferPage.fill_amount(state.transfer_amount);
     await TransferPage.selectToAccount(accountNumber);
     await TransferPage.click_Transfer();
