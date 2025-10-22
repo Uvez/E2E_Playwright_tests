@@ -40,7 +40,7 @@ Windows
 
    `cd https://github.com/Uvez/E2E_Playwright_tests.git`
 
-2. Initate Package.json file (Step 1) first and then install other modules as mentioned: 
+2. Initate Package.json file first and copy the same package.json file from Step 1 and then install other modules as mentioned: 
 
    `npm init` to setup node project with `package.json`
 
