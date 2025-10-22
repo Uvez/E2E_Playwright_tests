@@ -57,6 +57,8 @@ export class AccountPage extends BasePage {
 
   async verifyAccountCreation(): Promise<void> {
     try {
+      //await this.locator(selector).waitFor({ state: 'visible' }); 
+      await this.waitForUrlContains(this.page, 'openaccount.htm')
       await this.assertVisible(test_ids.account_services.account_Success_Msg);
       await expect(this.locator(test_ids.account_services.account_Success_Msg)).toHaveText(
         'Account Opened!'

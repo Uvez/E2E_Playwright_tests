@@ -40,7 +40,9 @@ Windows
 
    `cd https://github.com/Uvez/E2E_Playwright_tests.git`
 
-2. Install below node modules:
+2. Initate Package.json file (Step 1) first and then install other modules as mentioned: 
+
+   `npm init` to setup node project with `package.json`
 
    `npm install typescript --save-dev`
 

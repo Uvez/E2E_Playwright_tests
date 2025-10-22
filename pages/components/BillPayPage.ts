@@ -86,4 +86,44 @@ export class BillPayPage extends BasePage {
       log.warn(msg);
     }
   }
+
+
+  async verifyAccountvalid() {
+    try {
+      await this.assertVisible(test_ids.bill_pay.error_valid_account_number);
+      await expect(this.locator(test_ids.bill_pay.error_valid_account_number)).toContainText(
+        'Please enter a valid number.'
+      );
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : String(error);
+      throw new Error(msg);
+      log.warn(msg);
+    }
+  }
+
+  async verifyAccountmismatch() {
+    try {
+      await this.assertVisible(test_ids.bill_pay.error_account_verification);
+      await expect(this.locator(test_ids.bill_pay.error_account_verification)).toContainText(
+        'The account numbers do not match.'
+      );
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : String(error);
+      throw new Error(msg);
+      log.warn(msg);
+    }
+  }
+   async verifyAccountEmpty() {
+    try {
+      await this.assertVisible(test_ids.bill_pay.error_account_required_message);
+      await expect(this.locator(test_ids.bill_pay.error_account_required_message)).toContainText(
+        'Account number is required.'
+      );
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : String(error);
+      throw new Error(msg);
+      log.warn(msg);
+    }
+  }
+
 }

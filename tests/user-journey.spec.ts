@@ -52,10 +52,10 @@ test.describe.serial('User Journey', () => {
     await AccountPage.selectFromAccount();
     await page.waitForSelector(test_ids.account_services.new_account, { state: 'visible' });
     await AccountPage.click_New_Account_Button();
-    await page.waitForTimeout(1000);
+    //wait page.waitForTimeout(1000);
 
     await AccountPage.verifyAccountCreation();
-    await waitForUrlContains(page, 'openaccount.htm');
+    //await waitForUrlContains(page, 'openaccount.htm');
     accountNumber = await AccountPage.getAccountId();
     expect(accountNumber, 'New account id should be captured').toBeTruthy();
     log.info('Account Number created:'+accountNumber)
@@ -72,14 +72,12 @@ test.describe.serial('User Journey', () => {
   test('Transfer Funds into Account', async ({ page, TransferPage }) => {
     await TransferPage.goto();
     await TransferPage.click(test_ids.transfer_funds.transfer_funds);
-    await page.waitForTimeout(1000);
     await waitForUrlContains(page, 'transfer.htm');
     fromAccount = await TransferPage.getFromAccountNumber();
     log.info('From account number is: ' + fromAccount);
     await TransferPage.fill_amount(state.transfer_amount);
     await TransferPage.selectToAccount(accountNumber);
     await TransferPage.click_Transfer();
-    await page.waitForTimeout(1000);
     await waitForUrlContains(page, 'transfer.htm');
     await TransferPage.verifyTransferSuccess();
     await TransferPage.verifyTransferdetails(state.transfer_amount, fromAccount, accountNumber);
@@ -88,7 +86,6 @@ test.describe.serial('User Journey', () => {
   test('Bill Pay succeeds and transactions are visible via API', async ({ page, BillPayPage,Find_Transaction }) => {
     await BillPayPage.goto();
     await BillPayPage.click(test_ids.bill_pay.bill_pay);
-    await page.waitForTimeout(1000);
     await waitForUrlContains(page, 'billpay.htm');
     await BillPayPage.fill_payee_details({
       [test_ids.bill_pay.payee_name]: state.payee_firstname,
@@ -105,7 +102,6 @@ test.describe.serial('User Journey', () => {
     });
     await BillPayPage.selectFromAccount(accountNumber);
     await BillPayPage.click_Send_Payment();
-    await page.waitForTimeout(1000);
     await waitForUrlContains(page, 'billpay.htm');
     await BillPayPage.verifyPaymentSuccess();
     await BillPayPage.verifyPaymentDetails(state.amount_to_pay, accountNumber, state.payee_firstname,);
@@ -122,4 +118,30 @@ test.describe.serial('User Journey', () => {
     expect(Array.isArray(responseBody)).toBeTruthy();
     Find_Transaction.verify_JSON_responses(responseBody,state.amount_to_pay,accountNumber)
   });
+
+
+  test('Verify if Account Number entered as Invalid', async ({ page, BillPayPage }) => {
+    await BillPayPage.goto();
+    await BillPayPage.click(test_ids.bill_pay.bill_pay);
+    await waitForUrlContains(page, 'billpay.htm');
+    await BillPayPage.fill_payee_details({
+      [test_ids.bill_pay.payee_name]: state.payee_firstname,
+      [test_ids.bill_pay.payee_address]: test_data.location.streetAddress(),
+      [test_ids.bill_pay.payee_city]: test_data.location.city(),
+      [test_ids.bill_pay.payee_state]: test_data.location.state(),
+      [test_ids.bill_pay.payee_zipcode]: test_data.location.zipCode(),
+      [test_ids.bill_pay.payee_phone]: test_data.phone.number(),
+    });
+    await BillPayPage.fill_payment_details({
+      [test_ids.bill_pay.payee_account]: test_data.finance.accountNumber(),
+      [test_ids.bill_pay.verify_account]: test_data.finance.accountNumber(),
+      [test_ids.bill_pay.amount]:state.amount_to_pay,
+    });
+    await BillPayPage.selectFromAccount(accountNumber);
+    await BillPayPage.click_Send_Payment();
+    await waitForUrlContains(page, 'billpay.htm');
+    await BillPayPage.verifyAccountmismatch();
+
+  })
+
 });
