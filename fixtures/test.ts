@@ -5,8 +5,6 @@ import {
   Page,
   request as pwRequest,
 } from '@playwright/test';
-//import defaultConfig from '@config/default';
-// Update the path below if the actual file location or casing is different
 import { LoginPage } from '../pages/auth/LoginPage';
 import { RegisterPage } from '../pages/components/RegisterPage';
 import { AccountPage } from '../pages/components/AccountPage';
@@ -14,10 +12,8 @@ import { BillPayPage } from '../pages/components/BillPayPage';
 import { TransferPage } from '../pages/components/TransferPage';
 import { HeaderPage } from '../pages/components/HeaderPage';
 import { Find_Transaction } from '../pages/api/find_Transaction';
-//import { HeaderComponent } from '../pages/components/HeaderComponent';
-//import { ToastComponent } from '../pages/components/ToastComponent';
 
-type AppFixtures = {
+type test = {
   loginPage: LoginPage;
   RegisterPage: RegisterPage;
   AccountPage: AccountPage;
@@ -25,17 +21,10 @@ type AppFixtures = {
   TransferPage: TransferPage;
   HeaderPage: HeaderPage;
   Find_Transaction : Find_Transaction;
-  //header: HeaderComponent;
-  //toast: ToastComponent;
-  //creds: { email: string; pass: string };
   api: APIRequestContext;
 };
 
-export const test = base.extend<AppFixtures>({
-  //creds: async ({}, use) => {
-  // await use({ email: defaultConfig.creds.stdUser, pass: defaultConfig.creds.stdPass });
-  //},
-  // one context for all tests in the worker
+export const test = base.extend<test>({
 
   loginPage: async ({ page }, use) => {
     await use(new LoginPage(page));

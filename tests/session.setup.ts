@@ -17,8 +17,7 @@ const state = {
       })()
   };
 
-  //testdata.firstname
-setup('Register user and login', async ({ page, loginPage, RegisterPage }) => {
+setup('Register user and login with same user', async ({ page, loginPage, RegisterPage }) => {
     await RegisterPage.goto();
     await RegisterPage.fill_user_details({
       [test_ids.register.firstname]: test_data.person.firstName(),

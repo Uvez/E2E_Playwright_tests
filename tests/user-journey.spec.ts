@@ -19,14 +19,6 @@ test.describe.serial('User Journey', () => {
   let accountNumber: string;
   let fromAccount: string = '';
 
-  test('Register user and login with same user and verify the same user', async ({
-    page,
-    AccountPage,
-  }) => {
-    await AccountPage.goto();
-    await waitForUrlContains(page, 'overview.htm');
-  });
-
   test('Verify all Global navigation is working as expected', async ({ page, HeaderPage}) => {
     await HeaderPage.goto();
     await HeaderPage.click_verify_link(test_ids.header.AboutUs, 'about.htm');
