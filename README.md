@@ -139,6 +139,5 @@ Windows
 ## How the test files use the project
 
 - Tests import your custom `test` from `fixtures/test.ts`. That custom test already provides page objects (RegisterPage, AccountPage, etc.) to the test callbacks.
-- Use async test callbacks and await page actions.
 - Keep selectors in `data/test-ids.ts` so locators are easy to update.
-- Utlized faer library for Test data generation every run.
+- Utlized faker library for Test data generation in every run.
