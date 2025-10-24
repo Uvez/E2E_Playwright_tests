@@ -1,7 +1,6 @@
 import { Page, expect } from '@playwright/test';
 
 export async function waitForNetworkIdle(page: Page) {
-  // Simple heuristic
   await page.waitForLoadState('networkidle');
 }
 

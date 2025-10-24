@@ -29,11 +29,11 @@ test.describe.serial('User Journey', () => {
       'https://www.parasoft.com/products/'
     );
     await HeaderPage.go_back();
-    await HeaderPage.click_verify_link(
+   await HeaderPage.click_verify_link(
       test_ids.header.Locations,
       'https://www.parasoft.com/solutions/'
     );
-    await HeaderPage.go_back();
+     await HeaderPage.go_back();
   });
 
   test('Create a new Savings account', async ({ page, AccountPage }) => {
