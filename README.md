@@ -2,7 +2,7 @@
 
 Simple step‑by‑step guide to set up and run the Playwright E2E tests for this project.
 
-## Prerequisites (what you need)
+### Prerequisites (what you need)
 
 Mac (macOS) and Window OS
 
