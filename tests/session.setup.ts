@@ -17,6 +17,7 @@ const state = {
       })()
   };
 
+  //Setting up user before running tests
 setup('Register user and login with same user', async ({ page, loginPage, RegisterPage }) => {
     await RegisterPage.goto();
     await RegisterPage.fill_user_details({
