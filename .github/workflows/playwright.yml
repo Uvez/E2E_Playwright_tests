@@ -26,5 +26,5 @@ jobs:
       - name: Run Playwright tests
         env:
           PASSWORD: ${{ secrets.PASSWORD }}
-        run: npx playwright test
+        run: npm run test
 
