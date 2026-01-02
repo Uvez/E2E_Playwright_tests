@@ -11,7 +11,7 @@ import { AccountPage } from '../pages/components/AccountPage';
 import { BillPayPage } from '../pages/components/BillPayPage';
 import { TransferPage } from '../pages/components/TransferPage';
 import { HeaderPage } from '../pages/components/HeaderPage';
-import { Find_Transaction } from '../pages/api/find_Transaction';
+import { FindTransaction } from '../pages/api/FindTransaction';
 
 type test = {
   loginPage: LoginPage;
@@ -20,7 +20,7 @@ type test = {
   BillPayPage: BillPayPage;
   TransferPage: TransferPage;
   HeaderPage: HeaderPage;
-  Find_Transaction : Find_Transaction;
+  Find_Transaction : FindTransaction;
   api: APIRequestContext;
 };
 
@@ -45,7 +45,7 @@ export const test = base.extend<test>({
     await use(new HeaderPage(page));
   },
    Find_Transaction: async ({ page }, use) => {
-    await use(new Find_Transaction());
+    await use(new FindTransaction());
   },
 });
 

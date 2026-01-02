@@ -9,6 +9,7 @@ import { RegisterPage } from '../pages/components/RegisterPage';
 import {faker as test_data} from '@faker-js/faker'
 dotenv.config();
 
+
 test.describe.serial('User Journey', () => {
   const state = {
     amount_to_pay: test_data.finance.amount(),
@@ -108,7 +109,8 @@ test.describe.serial('User Journey', () => {
     log.info('API Response for account transactions: ' + JSON.stringify(responseBody))
 
     expect(Array.isArray(responseBody)).toBeTruthy();
-    Find_Transaction.verify_JSON_responses(responseBody,state.amount_to_pay,accountNumber)
+    await Find_Transaction.verify_JSON_responses(responseBody,state.amount_to_pay,accountNumber)
+  
   });
 
 

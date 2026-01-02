@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { log } from '../../utils/logger';
 import { Transaction } from '../../data/types';
 
-export class Find_Transaction {
+export class FindTransaction {
   async verify_JSON_responses(
     responseBody: Transaction[],
     amount_to_pay: string,
