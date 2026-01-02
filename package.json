@@ -8,8 +8,12 @@
     "format": "prettier -w .",
     "test:ui": "npx playwright test --ui",
     "test:headed": "npx playwright test --headed --project=chromium",
-    "test:all":"npx playwright test --headed --project=chromium --project=firefox --project=webkit",
-    "test:allheadless":"npx playwright test --project=chromium --project=firefox --project=webkit"
+    "test:all": "npx playwright test --headed --project=chromium --project=firefox --project=webkit",
+    "test:allheadless": "npx playwright test --project=chromium --project=firefox --project=webkit",
+    "report": "node generate-report.js && start mochawesome-report/mochawesome.html",
+    "report:generate": "node generate-report.js",
+    "report:open": "start mochawesome-report/mochawesome.html",
+    "report:playwright": "playwright show-report"
   },
   "repository": {
     "type": "git",
@@ -29,6 +33,11 @@
     "@types/node": "^24.7.1",
     "dotenv": "^17.2.1",
     "eslint": "^9.37.0",
+    "mocha": "^11.7.4",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.0.0",
+    "mochawesome-report-generator": "^6.3.0",
+    "playwright": "^1.56.0",
     "prettier": "^3.6.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"

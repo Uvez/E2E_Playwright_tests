@@ -10,23 +10,23 @@ export default defineConfig({
   fullyParallel: true,
   //forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  reporter: [['list'], ['html', { outputFolder: 'reports/html' }]],
+  reporter: [['list'], 
+  ['json', { outputFile: 'test-results/results.json' }],
+  ['html', { outputFolder: 'reports/html' }]],
   use: {
     baseURL: process.env.BASE_URL || 'https://parabank.parasoft.com/',
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
   },
   projects: [
+    { name: 'setup', testMatch: /.*\.setup\.ts/ },
 
-      {name :'setup', testMatch:  /.*\.setup\.ts/},
-
-    { name: 'chromium', 
-      dependencies:['setup'],
-      use: { ...devices['Desktop Chrome'],
-        storageState :'.auth/user.json'
-      }
-     },
-    { name: 'firefox',  use: { ...devices['Desktop Firefox'], storageState :'.auth/user.json' } },
-    { name: 'webkit',   use: { ...devices['Desktop Safari'], storageState :'.auth/user.json'} },
+    {
+      name: 'chromium',
+      dependencies: ['setup'],
+      use: { ...devices['Desktop Chrome'], storageState: '.auth/user.json' },
+    },
+    { name: 'firefox', use: { ...devices['Desktop Firefox'], storageState: '.auth/user.json' } },
+    { name: 'webkit', use: { ...devices['Desktop Safari'], storageState: '.auth/user.json' } },
   ],
 });
