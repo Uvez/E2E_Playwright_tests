@@ -19,6 +19,7 @@ const state = {
 
   //Setting up user before running tests
 setup('Register user and login with same user', async ({ page, loginPage, RegisterPage }) => {
+    setup.info().retry = 0;
     await RegisterPage.goto();
     await RegisterPage.fill_user_details({
       [test_ids.register.firstname]: test_data.person.firstName(),
