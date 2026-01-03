@@ -27,4 +27,15 @@ jobs:
         env:
           PASSWORD: ${{ secrets.PASSWORD }}
         run: npx playwright test --project=chromium
+       
+      - name: Upload Playwright Test Artifacts
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-artifacts
+          path: playwright-report
+
+      - name: Show report
+        if: failure()
+        run: npx playwright show-report && zip -r playwright-artifacts.zip playwright-report
 
