@@ -109,7 +109,7 @@ test.describe.serial('User Journey', () => {
     log.info('API Response for account transactions: ' + JSON.stringify(responseBody))
 
     expect(Array.isArray(responseBody)).toBeTruthy();
-    await Find_Transaction.verify_JSON_responses(responseBody,state.amount_to_pay,accountNumber)
+    Find_Transaction.verify_JSON_responses(responseBody,state.amount_to_pay,accountNumber)
   
   });
 
@@ -135,6 +135,30 @@ test.describe.serial('User Journey', () => {
     await BillPayPage.click_Send_Payment();
     await waitForUrlContains(page, 'billpay.htm');
     await BillPayPage.verifyAccountmismatch();
+
+  })
+
+  test('Verify if Account Number entered as Empty', async ({ page, BillPayPage }) => {
+    await BillPayPage.goto();
+    await BillPayPage.click(test_ids.bill_pay.bill_pay);
+    await waitForUrlContains(page, 'billpay.htm');
+    await BillPayPage.fill_payee_details({
+      [test_ids.bill_pay.payee_name]: state.payee_firstname,
+      [test_ids.bill_pay.payee_address]: test_data.location.streetAddress(),
+      [test_ids.bill_pay.payee_city]: test_data.location.city(),
+      [test_ids.bill_pay.payee_state]: test_data.location.state(),
+      [test_ids.bill_pay.payee_zipcode]: test_data.location.zipCode(),
+      [test_ids.bill_pay.payee_phone]: test_data.phone.number(),
+    });
+    await BillPayPage.fill_payment_details({
+      [test_ids.bill_pay.payee_account]: '',
+      [test_ids.bill_pay.verify_account]: '',
+      [test_ids.bill_pay.amount]:state.amount_to_pay,
+    });
+    await BillPayPage.selectFromAccount(accountNumber);
+    await BillPayPage.click_Send_Payment();
+    await waitForUrlContains(page, 'billpay.htm');
+    await BillPayPage.verifyAccountEmpty();
 
   })
 
