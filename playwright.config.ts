@@ -9,6 +9,7 @@ export default defineConfig({
   //expect: { timeout: 5_000 },
   fullyParallel: true,
   //forbidOnly: !!process.env.CI,
+  workers: process.env.CI ? 4 : undefined,
   retries: process.env.CI ? 2 : 0,
   reporter: [['list'], 
   ['json', { outputFile: 'test-results/results.json' }],
