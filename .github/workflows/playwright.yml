@@ -11,9 +11,9 @@ jobs:
     environment: 'QA'
     runs-on: ubuntu-latest
 
-    #container:
-      #image: mcr.microsoft.com/playwright:v1.57.0-noble
-      #options: --ipc=host
+    container:
+      image: mcr.microsoft.com/playwright:v1.57.0-noble
+      options: --ipc=host
 
    
     steps:
@@ -34,7 +34,7 @@ jobs:
       - name: Run Playwright tests (Parallel)
         env:
           PASSWORD: ${{ secrets.PASSWORD }}
-        run: npx playwright test project=chromium project=firefox project=webkit workers=4
+        run: npx playwright test project=chromium project=firefox project=webkit
        
       - name: Upload Playwright Test Artifacts
         if: failure()
