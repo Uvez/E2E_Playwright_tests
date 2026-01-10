@@ -3,6 +3,7 @@ import { test_ids } from '../../data/test-ids';
 import test, { expect } from '@playwright/test';
 import { log } from '../../utils/logger';
 
+// AccountPage class extending BasePage
 export class AccountPage extends BasePage {
   async goto(): Promise<void> {
     try {
